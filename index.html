@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tweet Sentiment Analysis</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: Arial, sans-serif;
+        }
+        .navbar {
+            margin-bottom: 20px;
+        }
+        .container {
+            max-width: 600px;
+        }
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        .btn-primary {
+            width: 100%;
+        }
+        #output, #suggestion {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #e9ecef;
+            border: 1px solid #ced4da;
+            border-radius: 5px;
+        }
+        footer {
+            margin-top: 20px;
+            padding: 10px 0;
+            text-align: center;
+            background-color: #343a40;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">Sentiment Analysis</a>
+    </nav>
+    <div class="container">
+        <h2 class="text-center">Is this a Cyberbulling Comment /Tweet</h2>
+        <form action="{{ url_for('predict') }}" method="post">
+            <div class="form-group">
+                <label for="text_value">Tweet:</label>
+                <input type="text" class="form-control" id="text_value" name="text_value" placeholder="Enter your tweet here" value="{{ text_value|default('') }}">
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+        {% if output_sentiment %}
+        <div id="output" class="text-center">
+            <strong>{{ output_sentiment }}</strong>
+        </div>
+        {% endif %}
+        {% if suggestion %}
+        <div id="suggestion" class="text-center">
+            <strong>Suggestion:</strong> {{ suggestion }}
+        </div>
+        {% endif %}
+    </div>
+    <footer>
+        <p>&copy; 2024 Sentiment Analysis</p>
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
